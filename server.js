@@ -7,7 +7,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-const notes = require("./routes/notes")
+const notes = require("./shmroutes/notes")
 app.use("/api/notes", notes)
 
 app.get("/", (req, res) => 
