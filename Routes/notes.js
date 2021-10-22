@@ -1,11 +1,12 @@
 const router = require("express").Router();
-const { readFromFile, writeToFile, readAndAppend } = require('../helpers/fsUtils.js');
+const { readFromFile, writeToFile, readAndAppend } = require('../helpers/fsUtils');
 const db = require("../db/db.json");
-const { randomUUID } = require("crypto");
+const uuid = require("../helpers/uuid");
+
 
 
 router.get("/", (req, res) => {
-    readFromFile(".db/db.json").then((data) => res.json(JSON.parse(data)));
+    readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
 router.get("/:id", (req, res) => {
@@ -14,7 +15,7 @@ router.get("/:id", (req, res) => {
             return res.json(db[i])
         }
     }
-    res.status(404).send('Incorrect ID numer')
+    res.status(404).send('Incorrect ID number')
 });
 
 router.post("/", (req, res) => {
@@ -23,10 +24,10 @@ router.post("/", (req, res) => {
         const newEntry = {
             title,
             text,
-            id: randomUUID()
+            id: uuid()
         };
 
-    readAndAppend(newEntry, ".db/db.json");
+    readAndAppend(newEntry, "./db/db.json");
     res.json("Note entry complete");
     } else {
         res.error("There was a problem with your note entry")
@@ -34,4 +35,4 @@ router.post("/", (req, res) => {
 });
 
 
-module.exports = notes
+module.exports = router
