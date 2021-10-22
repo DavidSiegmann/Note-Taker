@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { readFromFile, writeToFile, readAndAppend } = require('../shmelpers/fsUtils');
+const { readFromFile, writeToFile, readAndAppend } = require('../helpers/fsUtils');
 const db = require("../db/db.json");
-const uuid = require("../shmelpers/uuid");
+const uuid = require("../helpers/uuid");
 
 
 
